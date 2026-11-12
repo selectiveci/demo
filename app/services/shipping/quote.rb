@@ -11,7 +11,7 @@ module Shipping
 
     def cents
       return 0 if @order.line_items.empty?
-      return 0 if @subtotal_cents >= FREE_OVER_CENTS
+      return 0 if @subtotal_cents > FREE_OVER_CENTS
       return 0 if @order.customer.gold?
 
       base = BASE_CENTS.fetch(@order.ship_to_region, 1299)
