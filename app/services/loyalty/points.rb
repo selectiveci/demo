@@ -1,6 +1,6 @@
 module Loyalty
   class Points
-    MULTIPLIER = {"standard" => 1, "silver" => 2, "gold" => 3}.freeze
+    MULTIPLIER = {"standard" => 1, "silver" => 2, "gold" => 4}.freeze
 
     def self.for(customer, spent_cents:)
       return 0 if spent_cents <= 0
