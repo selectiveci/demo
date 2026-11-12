@@ -1,7 +1,7 @@
-Run the app in Pacific time
+Run the specs in random order
 
-An application-wide configuration change: the app's time zone moves from UTC to Pacific time, which can touch anything that reads or stores a time.
+A change to how the whole test suite runs: specs now run in a random order each time, to flush out tests that only pass because of what ran before them.
 
-**Expect:** Selective runs the entire suite across all four runners, because a change this broad can affect any test.
+**Expect:** Selective runs the entire suite across all four runners, because a change to the test setup can affect every test.
 
 _Demo pull request. It will be closed, not merged._

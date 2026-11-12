@@ -11,7 +11,7 @@ From the **Actions** tab, run **Demo scenario** and pick one:
 | Scenario | Change | What you'll see |
 |---|---|---|
 | `selected` | Gold members earn 4x loyalty points | Only the tests the change can affect run, on one runner |
-| `full` | The app moves to Pacific time | The whole suite runs across four runners |
+| `full` | Specs run in random order | The whole suite runs across four runners |
 
 The workflow opens a pull request with the change, and CI runs on it. When you're done, run **Close demo pull requests** to close them all and delete their branches.
 
