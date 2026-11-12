@@ -1,0 +1,23 @@
+diff --git a/app/services/loyalty/points.rb b/app/services/loyalty/points.rb
+index e4be845..8b5c327 100644
+--- a/app/services/loyalty/points.rb
++++ b/app/services/loyalty/points.rb
+@@ -1,6 +1,6 @@
+ module Loyalty
+   class Points
+-    MULTIPLIER = {"standard" => 1, "silver" => 2, "gold" => 3}.freeze
++    MULTIPLIER = {"standard" => 1, "silver" => 2, "gold" => 4}.freeze
+ 
+     def self.for(customer, spent_cents:)
+       return 0 if spent_cents <= 0
+diff --git a/spec/services/loyalty/points_spec.rb b/spec/services/loyalty/points_spec.rb
+index 24c09f5..f19191b 100644
+--- a/spec/services/loyalty/points_spec.rb
++++ b/spec/services/loyalty/points_spec.rb
+@@ -1,5 +1,5 @@
+ RSpec.describe Loyalty::Points do
+-  {"standard" => 42, "silver" => 84, "gold" => 126}.each do |tier, points|
++  {"standard" => 42, "silver" => 84, "gold" => 168}.each do |tier, points|
+     it "awards #{points} points to a #{tier} customer for $42.99" do
+       expect(described_class.for(Customer.new(tier:), spent_cents: 4299)).to eq(points)
+     end

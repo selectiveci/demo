@@ -1,0 +1,13 @@
+# Sales tax by region, with category overrides.
+CA:
+  default: 0.0725
+  grocery: 0.0
+NY:
+  default: 0.04
+  apparel: 0.0
+TX:
+  default: 0.0625
+WA:
+  default: 0.065
+OR:
+  default: 0.0

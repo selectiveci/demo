@@ -1,0 +1,11 @@
+WELCOME10:
+  kind: percent
+  amount: 0.10
+SAVE5:
+  kind: fixed
+  amount: 500
+  minimum_cents: 2500
+BOOKWORM:
+  kind: percent
+  amount: 0.20
+  category: books

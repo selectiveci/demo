@@ -1,0 +1,22 @@
+name: Close demo pull requests
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  close:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Close every open demo pull request and delete its branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          gh pr list --state open --label demo --json number --jq '.[].number' | while read -r pr; do
+            gh pr close "$pr" --delete-branch --comment "Demo finished."
+          done

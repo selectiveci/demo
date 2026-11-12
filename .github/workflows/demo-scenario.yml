@@ -1,0 +1,56 @@
+name: Demo scenario
+
+on:
+  workflow_dispatch:
+    inputs:
+      scenario:
+        description: "Which change to open as a pull request"
+        required: true
+        type: choice
+        default: selected
+        options:
+          - selected
+          - full
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  open:
+    runs-on: ubuntu-24.04
+    name: Open a ${{ inputs.scenario }} pull request
+    steps:
+      # Pushing with the deploy key, not GITHUB_TOKEN, is what lets the push
+      # start CI on the pull request.
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          ssh-key: ${{ secrets.DEMO_DEPLOY_KEY }}
+
+      - name: Open the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SCENARIO: ${{ inputs.scenario }}
+        run: |
+          set -euo pipefail
+          dir=.github/demo-scenarios/$SCENARIO
+          title=$(head -n1 "$dir/description.md")
+          branch="demo/$SCENARIO-$GITHUB_RUN_NUMBER"
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git switch -c "$branch"
+          git commit --allow-empty -q -m "Start the $SCENARIO demo"
+          git push -q origin "$branch"
+
+          url=$(gh pr create --base main --head "$branch" --title "$title" --body-file <(tail -n +3 "$dir/description.md") --label demo)
+
+          git apply "$dir/change.patch"
+          git add -A
+          git commit -q -m "$title"
+          git push -q origin "$branch"
+
+          echo "### [$title]($url)" >> "$GITHUB_STEP_SUMMARY"
+          echo "Opened $url"

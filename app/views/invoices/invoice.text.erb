@@ -1,0 +1,15 @@
+INVOICE #<%= @order.id %>
+Bill to: <%= @order.customer.name %> <<%= @order.customer.email %>>
+Ship to: <%= @order.ship_to_region %>
+
+<% @order.line_items.includes(:product).each do |item| -%>
+<%= item.quantity %> x <%= item.product.name %> (<%= item.product.sku %>)  <%= money(item.total_cents) %>
+<% end -%>
+
+Subtotal: <%= money(@receipt.subtotal_cents) %>
+<% if @receipt.discount_cents.positive? -%>
+Discount: -<%= money(@receipt.discount_cents) %>
+<% end -%>
+Tax:      <%= money(@receipt.tax_cents) %>
+Shipping: <%= @receipt.shipping_cents.zero? ? "FREE" : money(@receipt.shipping_cents) %>
+Total:    <%= money(@receipt.total_cents) %>
