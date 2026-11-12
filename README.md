@@ -12,6 +12,7 @@ From the **Actions** tab, run **Demo scenario** and pick one:
 |---|---|---|
 | `selected` | Gold members earn 4x loyalty points | Only the tests the change can affect run, on one runner |
 | `full` | Specs run in random order | The whole suite runs across four runners |
+| `failures` | Carrier rate tables, with a bug | Shipping tests run; three flaky tests fail then pass on retry and are flagged flaky; one real bug fails the build |
 
 The workflow opens a pull request with the change, and CI runs on it. When you're done, run **Close demo pull requests** to close them all and delete their branches.
 

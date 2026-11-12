@@ -11,6 +11,7 @@ on:
         options:
           - selected
           - full
+          - failures
 
 permissions:
   contents: write

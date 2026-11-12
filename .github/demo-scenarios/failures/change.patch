@@ -1,0 +1,80 @@
+diff --git a/app/services/shipping/carrier_rates.rb b/app/services/shipping/carrier_rates.rb
+new file mode 100644
+index 0000000..c8443fb
+--- /dev/null
++++ b/app/services/shipping/carrier_rates.rb
+@@ -0,0 +1,22 @@
++module Shipping
++  class CarrierRates
++    SOURCE = Rails.root.join("config/carrier_rates.yml")
++    SHEET_FETCH_SECONDS = 0.4
++
++    def self.for(carrier)
++      @tables ||= {}
++      @tables[carrier] ||= fetch(carrier)
++    end
++
++    def self.price(table, weight_grams:)
++      table.fetch("base_cents") + (weight_grams / 1000.0).ceil * table.fetch("per_kg_cents")
++    end
++
++    # Stands in for downloading the carrier's published rate sheet.
++    def self.fetch(carrier)
++      sleep(SHEET_FETCH_SECONDS)
++      YAML.load_file(SOURCE).fetch(carrier)
++    end
++    private_class_method :fetch
++  end
++end
+diff --git a/app/services/shipping/quote.rb b/app/services/shipping/quote.rb
+index 8d4bba0..fd2af9e 100644
+--- a/app/services/shipping/quote.rb
++++ b/app/services/shipping/quote.rb
+@@ -11,7 +11,7 @@ module Shipping
+ 
+     def cents
+       return 0 if @order.line_items.empty?
+-      return 0 if @subtotal_cents >= FREE_OVER_CENTS
++      return 0 if @subtotal_cents > FREE_OVER_CENTS
+       return 0 if @order.customer.gold?
+ 
+       base = BASE_CENTS.fetch(@order.ship_to_region, 1299)
+diff --git a/config/carrier_rates.yml b/config/carrier_rates.yml
+new file mode 100644
+index 0000000..e4c193c
+--- /dev/null
++++ b/config/carrier_rates.yml
+@@ -0,0 +1,9 @@
++ground:
++  base_cents: 499
++  per_kg_cents: 120
++express:
++  base_cents: 1499
++  per_kg_cents: 300
++freight:
++  base_cents: 4999
++  per_kg_cents: 45
+diff --git a/spec/services/shipping/carrier_rates_spec.rb b/spec/services/shipping/carrier_rates_spec.rb
+new file mode 100644
+index 0000000..f559463
+--- /dev/null
++++ b/spec/services/shipping/carrier_rates_spec.rb
+@@ -0,0 +1,18 @@
++require "benchmark"
++
++RSpec.describe Shipping::CarrierRates do
++  %w[ground express freight].each do |carrier|
++    it "quotes #{carrier} within the 250ms checkout budget" do
++      elapsed = Benchmark.realtime { described_class.price(described_class.for(carrier), weight_grams: 1200) }
++      expect(elapsed).to be < 0.25
++    end
++  end
++
++  let(:table) { {"base_cents" => 500, "per_kg_cents" => 100} }
++
++  [[0, 500], [1, 600], [1000, 600], [1001, 700], [12_500, 1800]].each do |grams, cents|
++    it "prices #{grams}g at #{cents} cents" do
++      expect(described_class.price(table, weight_grams: grams)).to eq(cents)
++    end
++  end
++end
