@@ -1,5 +1,5 @@
 RSpec.describe Loyalty::Points do
-  {"standard" => 42, "silver" => 84, "gold" => 126}.each do |tier, points|
+  {"standard" => 42, "silver" => 84, "gold" => 168}.each do |tier, points|
     it "awards #{points} points to a #{tier} customer for $42.99" do
       expect(described_class.for(Customer.new(tier:), spent_cents: 4299)).to eq(points)
     end
