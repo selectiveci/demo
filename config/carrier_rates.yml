@@ -1,0 +1,9 @@
+ground:
+  base_cents: 499
+  per_kg_cents: 120
+express:
+  base_cents: 1499
+  per_kg_cents: 300
+freight:
+  base_cents: 4999
+  per_kg_cents: 45
