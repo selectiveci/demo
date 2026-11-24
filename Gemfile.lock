@@ -224,25 +224,25 @@ GEM
       rspec-support (>= 3.13.0, < 5.0.0)
     rspec-support (3.13.8)
     securerandom (0.4.1)
-    selective-ruby-core (0.3.1)
+    selective-ruby-core (0.4.0)
       logger (~> 1.6)
-      zeitwerk (~> 2.6.12)
-    selective-ruby-core (0.3.1-aarch64-linux)
+      zeitwerk (>= 2.6.12, < 3)
+    selective-ruby-core (0.4.0-aarch64-linux)
       logger (~> 1.6)
-      zeitwerk (~> 2.6.12)
-    selective-ruby-core (0.3.1-arm64-darwin)
+      zeitwerk (>= 2.6.12, < 3)
+    selective-ruby-core (0.4.0-arm64-darwin)
       logger (~> 1.6)
-      zeitwerk (~> 2.6.12)
-    selective-ruby-core (0.3.1-x86_64-darwin)
+      zeitwerk (>= 2.6.12, < 3)
+    selective-ruby-core (0.4.0-x86_64-darwin)
       logger (~> 1.6)
-      zeitwerk (~> 2.6.12)
-    selective-ruby-core (0.3.1-x86_64-linux)
+      zeitwerk (>= 2.6.12, < 3)
+    selective-ruby-core (0.4.0-x86_64-linux)
       logger (~> 1.6)
-      zeitwerk (~> 2.6.12)
-    selective-ruby-rspec (0.1.11)
+      zeitwerk (>= 2.6.12, < 3)
+    selective-ruby-rspec (0.1.14)
       benchmark (>= 0.5.0)
       selective-ruby-core (>= 0.2.3)
-      zeitwerk (~> 2.6.12)
+      zeitwerk (>= 2.6.12, < 3)
     sqlite3 (2.10.2-aarch64-linux-gnu)
     sqlite3 (2.10.2-aarch64-linux-musl)
     sqlite3 (2.10.2-arm-linux-gnu)
@@ -365,12 +365,12 @@ CHECKSUMS
   rspec-rails (8.1.0) sha256=5e6c6a4e7f7d644b56e412d410824f6480c1e5a9c61b8448998236b4a4dbf3be
   rspec-support (3.13.8) sha256=e4160030309b7e3e9d9863dfe720a35dfcc577162f5402cd68fc8c5258a0ffd6
   securerandom (0.4.1) sha256=cc5193d414a4341b6e225f0cb4446aceca8e50d5e1888743fac16987638ea0b1
-  selective-ruby-core (0.3.1) sha256=e76d0668c59f0243145553f41fb6177d5ee66911736c2bcdb127bdc719bb0cbd
-  selective-ruby-core (0.3.1-aarch64-linux) sha256=217d112f9d20504b7ab21ffb883fec7c309ff1d144bbff1b55e82e3eef7138c7
-  selective-ruby-core (0.3.1-arm64-darwin) sha256=2f51a6377c8fd42d4762735f16c5aa9afd250f9ccf0be4084ae3879dfaf741e3
-  selective-ruby-core (0.3.1-x86_64-darwin) sha256=476e1a17b2249d3eed9f9f44236b84e136d9e2df4e908cce299748544beec38a
-  selective-ruby-core (0.3.1-x86_64-linux) sha256=48b17e6a66e3b168ead8d2d8b1cf11d751fffe8d5bd5b8af7e55d84d52563d33
-  selective-ruby-rspec (0.1.11) sha256=ce66107047f6d838983fb147824ad809520883517da483a596cbeb3684828fb3
+  selective-ruby-core (0.4.0) sha256=797abec6685b149e65fa479adf342999f8a0882c4486530a04313fc8f108a34f
+  selective-ruby-core (0.4.0-aarch64-linux) sha256=c1aaabdf5a07d35a4fd64cfafb69b9a9ef94e416fbaca1c44d190f4de107f407
+  selective-ruby-core (0.4.0-arm64-darwin) sha256=2052350dc580ded57dcac9b20bbda95447438e6556ef3190d370cd8e92344318
+  selective-ruby-core (0.4.0-x86_64-darwin) sha256=cfd7034b3ce599fce6a11cc3f41458f420a342a694fad110da87909eb301ce63
+  selective-ruby-core (0.4.0-x86_64-linux) sha256=253df6c6b096d9686072af9b76885bb2c9b30d05a639069a2d8c3da130e7e86e
+  selective-ruby-rspec (0.1.14) sha256=aa561949a0f168edc91321bcfb3ad68b2b1d8e17c58f11e32692d702718e73f4
   sqlite3 (2.10.2-aarch64-linux-gnu) sha256=e9aea2c2b3476fc875dd8a89313a9a2862818519c0186bfb5b56d6f57bb08d98
   sqlite3 (2.10.2-aarch64-linux-musl) sha256=4986fc40cdf21342362b72a941df28e95cfe0e644f3ad2532d948b157c39dbee
   sqlite3 (2.10.2-arm-linux-gnu) sha256=762f609ef891463226b472d3df66aea84d5466ff4376d3ccf4a059718c4ce9c9
